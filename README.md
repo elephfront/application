@@ -1,5 +1,7 @@
 # Elephfront application skeleton
 
+**This repository is under development.**
+
 Elephfront is an open-source PHP front-end template creations stack.  
 
 This repository is an application skeleton based on the Elephfront tools. You can use it to quickly kickstart your new templates creation project.  
@@ -33,6 +35,39 @@ vendor/bin/robo serve
 This will start a new server under the URL `http://localhost:9876/` and launch your default browser to this URL.
 From now on, every change you make in your assets files will trigger a "compilation" on those files and automatically refresh your browser in order to ease your development process.
 
+## Directory structure
+
+By default, the project contains a **src** directory. This is where you put all your raw assets.   
+The expected structure is the following :
+
+```
+src/
+  assets/
+    css/
+    js/
+  pages/
+  system/
+```
+
+### assets/css
+
+The **assets/css** folder is where you put your SASS files.  
+By default a **main.scss** file is expected and will be compiled and minified.
+
+### assets/js
+
+The **assets/js** folder is where you put your JS files.  
+By default a **main.js** file is expected and will be compiled and minified.
+
+### pages
+
+The **pages** folder is where you put the various templates you want to created. The files are expected to be **.php** files. The inner structure is left to you. Just be aware that if you create an **index.php** file, it will fetched by default by the router if you try to reach a sub-directory. You can use everything you would do in PHP in those files (like `include`, `require`, functions, etc.), they will be interpreted by a PHP server.
+
+### system
+
+This folder is internal to Elephfront and contains the router used by the internal PHP server launched by the `serve` command and the error page if the page you try to reach does not exist when the server is launched. This is also were the **robo-live-reload** will put its JS file to make the browser listens for messages from the Web Socket server.    
+In most cases, you will never need to touch the files in this directory.
+
 ## Commands
 
 Aside from the `serve` command, this skeleton provides a few other useful methods if you need to perform specific tasks without using the servers.
@@ -56,3 +91,13 @@ Compile the *.scss* files using the [robo-sass task](https://github.com/elephfro
 ### copy:directories
 
 Copy the directories **pages** and **system** (and all the directories configured under the `compile.directories` configuration key) to the **build** directory.
+
+## Contributing
+
+If you find a bug or would like to ask for a feature, please use the [GitHub issue tracker](https://github.com/Elephfront/application/issues).
+If you would like to submit a fix or a feature, please fork the repository and [submit a pull request](https://github.com/Elephfront/application/pulls).
+
+## License
+
+Copyright (c) 2017, Yves Piquel and licensed under [The MIT License](http://opensource.org/licenses/mit-license.php).
+Please refer to the LICENSE.txt file.
