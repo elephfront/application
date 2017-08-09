@@ -13,7 +13,10 @@ use Robo\Tasks;
 class RoboFile extends Tasks
 {
 
-    use EventDispatcherTrait;
+    use EventDispatcherTrait {
+        dispatchEvent as protected;
+        eventManager as protected;
+    }
     use LoadCssMinifyTasksTrait;
     use LoadImportJavascriptTasksTrait;
     use LoadJsMinifyTasksTrait;
