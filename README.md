@@ -68,6 +68,10 @@ The **pages** folder is where you put the various templates you want to created.
 This folder is internal to Elephfront and contains the router used by the internal PHP server launched by the `serve` command and the error page if the page you try to reach does not exist when the server is launched. This is also were the **robo-live-reload** will put its JS file to make the browser listens for messages from the Web Socket server.    
 In most cases, you will never need to touch the files in this directory.
 
+## Configuration
+
+TODO : **elephfront-config.php** / **elephfront-bootstrap.php**
+
 ## Commands
 
 Aside from the `serve` command, this skeleton provides a few other useful methods if you need to perform specific tasks without using the servers.
