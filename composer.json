@@ -1,0 +1,17 @@
+{
+    "name": "elephfront/application",
+    "description": "Elephfront application skeleton",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "consolidation/robo": "*",
+        "elephfront/robo-css-minify": "*",
+        "elephfront/robo-import-js": "*",
+        "elephfront/robo-js-minify": "*",
+        "elephfront/robo-sass": "*",
+        "elephfront/robo-live-reload": "*",
+        "henrikbjorn/lurker": "^1.2",
+        "cakephp/event": "^3.4"
+    },
+    "prefer-stable": true
+}
