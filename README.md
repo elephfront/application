@@ -2,7 +2,7 @@
 
 **This repository is under development.**
 
-Elephfront is an open-source PHP front-end template creations stack.  
+Elephfront is an open-source PHP front-end stack for templates creation.  
 
 This repository is an application skeleton based on the Elephfront tools. You can use it to quickly kickstart your new templates creation project.  
 This application skeleton will manage for you your SASS assets compilation, your CSS minification, your JS inclusion, your JS minification and comes bundled with a Live Reload server that will really ease your templates developments.
@@ -32,7 +32,7 @@ Once installed, you can use the following command to start both servers :
 vendor/bin/robo serve
 ```
 
-This will start a new server under the URL `http://localhost:9876/` and launch your default browser to this URL.
+This will start a new server under the `http://localhost:9876/` URL and launch your default browser to this URL.  
 From now on, every change you make in your assets files will trigger a "compilation" on those files and automatically refresh your browser in order to ease your development process.
 
 ## Directory structure
@@ -72,23 +72,23 @@ In most cases, you will never need to touch the files in this directory.
 
 Aside from the `serve` command, this skeleton provides a few other useful methods if you need to perform specific tasks without using the servers.
  
-### build
+### `build`
 
 This command will build the **build** directory from the **src** directory : it will copy all **pages** and **system** directories and compile all assets.
 
-### compile:assets
+### `compile:assets`
 
 Compile all assets (SASS & JS).
 
-### compile:js
+### `compile:js`
 
 Include all JS scripts included using the `roboimport()` method (from the [robo-import-js task](https://github.com/elephfront/robo-import-js)) and minify them (using the [robo-js-minify task](https://github.com/elephfront/robo-js-minify)).
 
-### compile:scss
+### `compile:scss`
 
 Compile the *.scss* files using the [robo-sass task](https://github.com/elephfront/robo-sass) and minify them using the [robo-css-minify task](https://github.com/elephfront/robo-css-minify).
 
-### copy:directories
+### `copy:directories`
 
 Copy the directories **pages** and **system** (and all the directories configured under the `compile.directories` configuration key) to the **build** directory.
 
