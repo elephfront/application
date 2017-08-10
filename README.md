@@ -70,7 +70,47 @@ In most cases, you will never need to touch the files in this directory.
 
 ## Configuration
 
-TODO : **elephfront-config.php** / **elephfront-bootstrap.php**
+### Compilation tasks
+
+By default, the compilations tasks only process a `main.scss` and a `main.js` file.  
+If you wish to have the CSS compilation task or the JS compilation task to manage more files, you can add them by creating and using the **elephfront-config.php** configuration file at the root of the project.
+
+This file is expected to return a single array. Its structure should be the same as the one from the `loadDefaultConfig()` method in the **RoboFile.php** file.  
+Let's say you have the following directory and file structure:
+
+```
+src/
+  assets/
+    css/
+      home/
+        slider.scss
+      main.scss
+      home.scss // contains an `include('home/slider.scss')`
+    js/
+  pages/
+  system/
+```
+
+You could have the following **elephfront-config.php** file:
+
+```php
+<?php
+return [
+    'compile' => [
+        'css' => [
+            $config['paths']['source'] . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'home.scss' => $config['paths']['build'] . 'assets' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'home.css',
+        ]
+    ]
+];
+```
+
+From now on, when the `compile:scss` task is called, it will not only manage your **main.scss** file, but also your **home.scss** file.  
+Note that the configuration from your **elephfront-config.php** file is merged with the default configuration, so you do not have to rewrite the basic configuration when defining an **elephfront-config.php** file.  
+Please also note that the current configuration is passed to the **elephfront-config.php** file through the variable `$config` so you can get access to the **source** and **build** directories path.  
+
+The exact same thing can be done for JS file : just change the `css` key under the `compile` key to `js`.
+
+TODO : Config : folders to copy (example with fonts) / **elephfront-bootstrap.php**
 
 ## Commands
 
