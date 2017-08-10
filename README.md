@@ -110,7 +110,24 @@ Please also note that the current configuration is passed to the **elephfront-co
 
 The exact same thing can be done for JS file : just change the `css` key under the `compile` key to `js`.
 
-TODO : Config : folders to copy (example with fonts) / **elephfront-bootstrap.php**
+### Directory copy task
+
+As for assets compilation, you can add more directories to copy from the **source** to the **build** directory. By default, only the **pages** and **system** directories are copied. You can add more using the **elephfront-bootstrap.php** files:
+
+```php
+<?php
+return [
+    'compile' => [
+        'directories' => [
+            $config['paths']['source'] . 'assets' . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR => $config['paths']['build'] . 'assets' . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR,
+        ]
+    ]
+];
+```
+
+This would also copy the directory under **src/assets/fonts** to **build/assets/fonts**.
+
+TODO : **elephfront-bootstrap.php**
 
 ## Commands
 
