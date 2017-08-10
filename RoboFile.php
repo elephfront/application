@@ -244,7 +244,7 @@ class RoboFile extends Tasks
     {
         $cssSourceMap = $this->config['compile']['css'];
 
-        if ($disableEvents === false) {
+        if ($disableEvents !== true) {
             $event = new \Cake\Event\Event('Elephfront.Scss.beforeCompile', $this, [
                 'sourceMap' => $cssSourceMap,
                 'config' => $this->config
@@ -259,7 +259,7 @@ class RoboFile extends Tasks
             ->taskCssMinify()
             ->run();
 
-        if ($disableEvents === false) {
+        if ($disableEvents !== true) {
             $event = new \Cake\Event\Event('Elephfront.Scss.afterCompile', $this, [
                 'sourceMap' => $cssSourceMap,
                 'config' => $this->config
@@ -271,11 +271,20 @@ class RoboFile extends Tasks
     /**
      * Executes the compilation of JS assets
      *
+     * @param bool $disableEvents Whether events should be dispatched or not. Default to false.
      * @return void
      */
-    public function compileJs()
+    public function compileJs($disableEvents = false)
     {
         $jsSourceMap = $this->config['compile']['js'];
+
+        if ($disableEvents !== true) {
+            $event = new \Cake\Event\Event('Elephfront.Js.beforeCompile', $this, [
+                'sourceMap' => $jsSourceMap,
+                'config' => $this->config
+            ]);
+            $this->eventManager()->dispatch($event);
+        }
 
         $collection = $this->collectionBuilder();
         $collection
@@ -284,6 +293,14 @@ class RoboFile extends Tasks
                 ->disableWriteFile()
             ->taskJsMinify()
             ->run();
+
+        if ($disableEvents !== true) {
+            $event = new \Cake\Event\Event('Elephfront.Js.afterCompile', $this, [
+                'sourceMap' => $jsSourceMap,
+                'config' => $this->config
+            ]);
+            $this->eventManager()->dispatch($event);
+        }
     }
 
     /**
