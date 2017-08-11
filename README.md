@@ -127,7 +127,44 @@ return [
 
 This would also copy the directory under **src/assets/fonts** to **build/assets/fonts**.
 
-TODO : **elephfront-bootstrap.php**
+### Events and bootstrap
+
+When compiling SASS et JS assets, Elephfront emits two events : one before the compilation and one after. When these events are emitted, they are given the current source map (the array containing the source and destination files to compile), the current configuration and more importantly, the current Robo instance, allowing you to run custom tasks before or after these tasks are done.
+
+If you need to perform actions before or after (for instance, you might want to copy a folder from the vendor directory to your source directory before the compilation takes place if you are loading the Foundation CSS framework with composer) the compilation takes place, you can register handlers for those events using the **elephfront-bootstrap.php** files. It should be located on the same directory as the **RoboFile.php** file.
+
+Let's say you are loading the Foundation CSS framework with composer, you could add the following to your **elephfront-bootstrap.php** to include it in your **src** directory :
+
+```php
+<?php
+use Cake\Event\EventManager;
+
+EventManager::instance()->on('Elephfront.Scss.beforeCompile', function(\Cake\Event\Event $event) {
+    $robo = $event->getSubject();
+    $robo
+        ->taskCopyDir([
+            'vendor/zurb/foundation/scss' => 'src/assets/css/libs/foundation',
+            'vendor/zurb/foundation/_vendor/normalize-scss' => 'src/assets/css/libs/normalize-scss',
+            'vendor/zurb/foundation/_vendor/sassy-lists' => 'src/assets/css/libs/sassy-lists',
+        ])
+        ->run();
+    
+    $robo->taskReplaceInFile('src/assets/css/libs/foundation/foundation.scss')
+        ->from('../_vendor')
+        ->to('../')
+        ->run();
+});
+```
+
+For the SASS compilation, here are the events emitted :
+
+- Elephfront.Scss.beforeCompile
+- Elephfront.Scss.afterCompile
+
+For the JS compilation, here are the events emitted :
+
+- Elephfront.Js.beforeCompile
+- Elephfront.Js.afterCompile
 
 ## Commands
 
